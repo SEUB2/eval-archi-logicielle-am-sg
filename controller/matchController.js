@@ -1,13 +1,12 @@
-// Ici viendront les 
-app.get('/teams', (req, res) => {
-    res.json(data.teams);
-  });
-  
-  app.get('/matches', (req, res) => {
+const data = require('../data')
+const recalculateRanking = require('../service/rankingService')
+
+
+  function getAllMatches(req,res){
     res.json(data.matches);
-  });
+  }
   
-  app.post('/matches', (req, res) => {
+  function createMatch (req, res) {
     const { team1Id, team2Id } = req.body || {};
     if (!Number.isSafeInteger(team1Id) || !Number.isSafeInteger(team2Id)) {
       return res.status(400).json({ error: 'Les identifiants des équipes doivent être des entiers.' });
@@ -31,9 +30,9 @@ app.get('/teams', (req, res) => {
     };
     data.matches.push(match);
     res.status(201).json(match);
-  });
+  };
   
-  app.post('/matches/:id/result', async (req, res) => {
+  async function recordMatchResult (req, res){
     const match = data.matches.find((entry) => String(entry.id) === req.params.id);
     if (!match) {
       return res.status(404).json({ error: 'Match introuvable.' });
@@ -54,23 +53,8 @@ app.get('/teams', (req, res) => {
     recalculateRanking();
     await notifyTeams(match);
     res.json(match);
-  });
-  
-  app.get('/ranking', (req, res) => {
-    res.json(data.ranking);
-  });
-  
-  app.use((req, res) => {
-    res.status(404).json({ error: 'Route introuvable.' });
-  });
-  
-  app.use((error, req, res, next) => {
-    if (error.type === 'entity.parse.failed') {
-      return res.status(400).json({ error: 'Le corps de la requête doit être un JSON valide.' });
-    }
-    const status = error.status >= 400 && error.status < 500 ? error.status : 500;
-    res.status(status).json({ error: status === 500 ? 'Erreur interne du serveur.' : error.message });
-  });
-  
-  recalculateRanking();
+  };
+
+
+module.exports = {getAllMatches, createMatch, recordMatchResult}
   
