@@ -9,6 +9,11 @@ Six équipes sont disponibles au démarrage : Shadow Wolves, Pixel Warriors, Cyb
 - Node.js 22 ou version ultérieure et npm.
 - Facultatif : l'extension REST Client de VS Code pour exécuter `requests.http`.
 
+## Schéma :
+
+![image](image.png)
+
+
 ## Installation et démarrage
 
 Depuis le dossier du projet :

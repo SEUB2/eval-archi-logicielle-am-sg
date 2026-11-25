@@ -9,7 +9,9 @@ Diversification des interface   → Créer des views indépendantes
 ```
 MVC
 │   package.json
-│   server.js
+│   app.js
+│   route.js
+│   router.js
 │   
 └───public
     │   index.html
@@ -26,6 +28,12 @@ MVC
     │       ResultView.js  
     │       RankingView.js  
     │
+    service
+    |     ServiceController.js
+    |     ServiceController.js
+    |     ServiceController.js
+    |     ServiceController.js
+    |
     └───controller
             TeamController.js
             MatcheController.js
