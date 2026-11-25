@@ -1,7 +1,7 @@
-const data = require('../data');
+const teamsRepository = require('../repository/teamsRepository')
 
 function getAllTeams(req, res) {
-    res.json(data.teams);
+    res.json(teamsRepository.getAllTeams());
   };
 
 module.exports = {getAllTeams}
