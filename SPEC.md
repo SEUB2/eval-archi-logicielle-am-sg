@@ -9,7 +9,9 @@ Diversification des interface   → Créer des views indépendantes
 ```
 MVC
 │   package.json
-│   server.js
+│   app.js
+│   route.js
+│   router.js
 │   
 └───public
     │   index.html
