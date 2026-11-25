@@ -5,14 +5,16 @@ const data = require('./data');
 const recalculateRanking = require('./service/rankingService')
 const notifyTeams = require('./service/notificationService')
 
+// import views
+const TeamView = require('./views/Teams');
+
+
 const app = express();
 app.use(express.json());
-
 
 const matchRoutes = require('./routes/matchRoutes');
 const teamRoutes = require('./routes/teamRoutes');
 const rankingRoutes = require('./routes/rankingRoutes');
-
 
 app.use('/matches', matchRoutes);
 app.use('/teams', teamRoutes);
@@ -34,4 +36,11 @@ recalculateRanking();
 
 app.listen(3000, () => {
   console.log('Arena Tournament disponible sur http://localhost:3000');
+});
+
+
+// Render React view
+app.get('/teams', (req, res) => {
+  const teams = TeamView.getAll();
+  res.send(<Teams teams={teams} />);
 });
