@@ -1,7 +1,7 @@
-const data = require('../data')
+const rankingRepository = require('../repository/rankingRepository')
 
 function getRanking(req, res) {
-    res.json(data.ranking);
+    res.json(rankingRepository.getAllRanking());
 }
 
 module.exports = {getRanking}
